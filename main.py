@@ -10,8 +10,6 @@ import subprocess
 import wolframalpha
 import json
 import requests
-import tkinter as tk
-from tkinter import *
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -20,6 +18,7 @@ engine.setProperty('rate', 175)
 
 
 def speak(text):
+    time.sleep(0.1)
     engine.say(text)
     engine.runAndWait()
 
@@ -51,6 +50,18 @@ def take_command():
             speak("Pardon me, please say that again")
             return "None"
         return statement
+
+
+def tell_joke():
+    url = "https://official-joke-api.appspot.com/random_joke"
+    r = requests.get(url)
+    json_data = r.json()
+    setup = json_data["setup"]
+    punchline = json_data["punchline"]
+    print(setup + " " + punchline)
+    speak(setup)
+    time.sleep(1)
+    speak(punchline)
 
 
 print("Loading your AI personal assistant Moon")
@@ -105,6 +116,9 @@ if __name__ == '__main__':
             statement = statement.replace("search", "")
             webbrowser.open_new_tab(statement)
             time.sleep(5)
+
+        elif "joke" in statement:
+            tell_joke()
 
         elif 'ask' in statement:
             speak('I can answer to computational and geographical questions  and what question do you want to ask now')
