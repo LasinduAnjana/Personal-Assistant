@@ -1,0 +1,8 @@
+{
+    "app_id": "personal_assistant-quvlp",
+    "config_version": 20210101,
+    "name": "personal_assistant",
+    "location": "US-VA",
+    "provider_region": "aws-us-east-1",
+    "deployment_model": "LOCAL"
+}
